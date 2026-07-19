@@ -17,15 +17,19 @@
 box-sizing:border-box;
 }
 
+
 body{
+
 margin:0;
 background:#f4f4f4;
 font-family:'Montserrat',Arial,sans-serif;
 color:#222;
+
 }
 
 
 .box{
+
 width:90%;
 max-width:430px;
 margin:40px auto;
@@ -33,121 +37,170 @@ background:white;
 padding:30px;
 border-radius:18px;
 box-shadow:0 5px 20px rgba(0,0,0,0.12);
+
 }
+
 
 
 .logo{
+
 display:block;
 width:130px;
-margin:0 auto 20px auto;
+margin:0 auto 20px;
+
 }
+
 
 
 h1{
+
 text-align:center;
 font-size:27px;
 margin:0;
-font-weight:700;
+
 }
 
 
+
 .sottotitolo{
+
 text-align:center;
 color:#f58220;
 font-size:19px;
 font-weight:600;
 margin:10px 0 20px;
+
 }
 
 
+
 .descrizione{
+
 text-align:center;
 font-size:13px;
 color:#666;
 line-height:1.6;
+
 }
+
 
 
 label{
+
 display:block;
 margin-top:18px;
-font-size:14px;
 font-weight:600;
+font-size:14px;
+
 }
 
 
+
 input{
+
 width:100%;
 padding:13px;
 margin-top:7px;
 border-radius:8px;
 border:1px solid #ddd;
-font-family:'Montserrat',sans-serif;
+font-family:'Montserrat';
+
 }
 
 
+
 .checkbox{
+
 display:flex;
 align-items:center;
 gap:8px;
-font-weight:500;
+
 }
 
 
 .checkbox input{
+
 width:auto;
+
 }
+
 
 
 button{
+
 width:100%;
 margin-top:25px;
 padding:15px;
-background:#f58220;
-color:white;
+
 border:0;
 border-radius:8px;
+
+background:#f58220;
+
+color:white;
+
 font-size:15px;
 font-weight:600;
+
 cursor:pointer;
+
 }
 
 
-button:hover{
-opacity:0.9;
+
+#prenota{
+
+display:none;
+
+background:#25D366;
+
 }
+
 
 
 #risultato{
+
 margin-top:25px;
 text-align:center;
 font-size:18px;
 font-weight:600;
 line-height:1.6;
+
 }
+
 
 
 .supplementi{
+
 font-size:13px;
-font-weight:400;
 color:#666;
+font-weight:400;
 margin-top:15px;
+
 }
+
 
 
 .avviso{
+
 width:90%;
 max-width:430px;
 margin:20px auto;
+
 text-align:center;
 font-size:12px;
 color:#666;
+
 line-height:1.6;
+
 }
+
 
 </style>
 
+
 </head>
+
 
 
 <body>
@@ -156,10 +209,13 @@ line-height:1.6;
 <div class="box">
 
 
-<img class="logo" src="https://raw.githubusercontent.com/guidofrancesco123-dotcom/Calcolatore-Cooperativa-Taxi-Lecce/main/logo.png" alt="Cooperativa Taxi Lecce">
+<img class="logo" src="https://raw.githubusercontent.com/guidofrancesco123-dotcom/Calcolatore-Cooperativa-Taxi-Lecce/main/logo.png">
 
 
-<h1>Cooperativa Taxi Lecce</h1>
+
+<h1>
+Cooperativa Taxi Lecce
+</h1>
 
 
 <div class="sottotitolo">
@@ -167,11 +223,13 @@ Calcola il tuo preventivo
 </div>
 
 
+
 <div class="descrizione">
+
 Inserisci gli indirizzi completi di partenza e destinazione.
-<br>
-Esempio: Via XX Settembre 10, Lecce
+
 </div>
+
 
 
 
@@ -182,11 +240,13 @@ Partenza
 <input id="partenza" placeholder="Indirizzo completo di partenza">
 
 
+
 <label>
 Destinazione
 </label>
 
 <input id="destinazione" placeholder="Indirizzo completo di destinazione">
+
 
 
 <label>
@@ -196,11 +256,13 @@ Ora del servizio
 <input id="ora" type="time">
 
 
+
 <label>
 Numero bagagli
 </label>
 
 <input id="bagagli" type="number" min="0" value="0">
+
 
 
 <label class="checkbox">
@@ -213,8 +275,11 @@ Servizio festivo (+3€)
 
 
 
+
 <button onclick="calcola()">
+
 Calcola preventivo
+
 </button>
 
 
@@ -222,44 +287,66 @@ Calcola preventivo
 <div id="risultato"></div>
 
 
+
+<button id="prenota" onclick="vaiPrenotazione()">
+
+Prenota servizio
+
+</button>
+
+
+
 </div>
+
 
 
 <div class="avviso">
 
-Il prezzo calcolato è puramente indicativo.
-<br>
-Può variare in base al percorso effettivo,
-al traffico e ad eventuali esigenze del servizio.
+Il preventivo è puramente indicativo e può variare in base al percorso effettivo, al traffico e alle condizioni del servizio.
 
 </div>
+
+
 
 
 
 <script>
 
 
+
 async function geocode(indirizzo){
 
+
 let risposta = await fetch(
+
 "https://nominatim.openstreetmap.org/search?format=json&q="
 +
 encodeURIComponent(indirizzo)
+
 );
+
 
 
 let dati = await risposta.json();
 
 
+
 if(dati.length===0){
+
 throw "Indirizzo non trovato";
+
 }
 
 
+
 return {
+
 lat:dati[0].lat,
+
 lon:dati[0].lon
+
 };
+
 
 }
 
@@ -269,13 +356,16 @@ lon:dati[0].lon
 async function calcola(){
 
 
+
 let risultato=document.getElementById("risultato");
 
 
 risultato.innerHTML="Calcolo in corso...";
 
 
+
 try{
+
 
 
 let partenza =
@@ -293,6 +383,7 @@ document.getElementById("destinazione").value
 
 
 let url =
+
 "https://router.project-osrm.org/route/v1/driving/"
 +
 partenza.lon+","+partenza.lat+
@@ -303,6 +394,7 @@ destinazione.lon+","+destinazione.lat+
 
 
 let risposta=await fetch(url);
+
 
 let percorso=await risposta.json();
 
@@ -320,8 +412,8 @@ let dettagli=[];
 
 
 
-
 let ora=document.getElementById("ora").value;
+
 
 
 if(ora){
@@ -330,13 +422,12 @@ if(ora){
 let oraNumero=Number(ora.split(":")[0]);
 
 
+
 if(oraNumero>=21 && oraNumero<24){
 
 prezzo+=3;
 
-dettagli.push(
-"Servizio notturno 21:00-00:00: +3€"
-);
+dettagli.push("Servizio notturno 21:00-00:00: +3€");
 
 }
 
@@ -345,9 +436,7 @@ if(oraNumero>=0 && oraNumero<6){
 
 prezzo+=5;
 
-dettagli.push(
-"Servizio notturno 00:00-06:00: +5€"
-);
+dettagli.push("Servizio notturno 00:00-06:00: +5€");
 
 }
 
@@ -359,6 +448,7 @@ dettagli.push(
 let bagagli=Number(
 document.getElementById("bagagli").value
 );
+
 
 
 if(bagagli>0){
@@ -378,9 +468,7 @@ if(document.getElementById("festivo").checked){
 
 prezzo+=3;
 
-dettagli.push(
-"Servizio festivo: +3€"
-);
+dettagli.push("Servizio festivo: +3€");
 
 }
 
@@ -396,29 +484,8 @@ prezzo=10;
 
 
 
-let testoSupplementi;
 
-
-if(dettagli.length>0){
-
-testoSupplementi =
-"<div class='supplementi'>"+
-"<b>Supplementi applicati:</b><br>"+
-dettagli.join("<br>")+
-"</div>";
-
-}
-else{
-
-testoSupplementi =
-"<div class='supplementi'>Nessun supplemento applicato</div>";
-
-}
-
-
-
-
-risultato.innerHTML =
+risultato.innerHTML=
 
 "Distanza: "
 +
@@ -438,27 +505,60 @@ prezzo.toFixed(2)
 
 +
 
-testoSupplementi;
+"<div class='supplementi'>"
+
++
+
+(dettagli.length>0
+
+?
+
+"<br><b>Supplementi applicati:</b><br>"+dettagli.join("<br>")
+
+:
+
+"<br>Nessun supplemento applicato"
+
+)
+
++
+
+"</div>";
+
+
+
+
+document.getElementById("prenota").style.display="block";
 
 
 
 }
+
 
 
 catch(e){
 
 
-risultato.innerHTML=
-"Errore. Controlla gli indirizzi inseriti.";
+risultato.innerHTML="Errore. Controlla gli indirizzi inseriti.";
 
+}
 
-console.log(e);
 
 
 }
 
 
+
+
+
+function vaiPrenotazione(){
+
+
+window.location.href="prenotazione.html";
+
+
 }
+
 
 
 </script>
