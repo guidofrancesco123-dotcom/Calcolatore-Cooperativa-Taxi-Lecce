@@ -13,23 +13,21 @@
 
 <style>
 
-* {
-box-sizing: border-box;
+*{
+box-sizing:border-box;
 }
 
-
-body {
+body{
 
 margin:0;
-padding:0;
 background:#f4f4f4;
-font-family:'Montserrat', Arial, sans-serif;
+font-family:'Montserrat',Arial,sans-serif;
 color:#222;
 
 }
 
 
-.box {
+.box{
 
 width:90%;
 max-width:430px;
@@ -42,105 +40,86 @@ box-shadow:0 5px 20px rgba(0,0,0,0.12);
 }
 
 
-/* LOGO */
-
-.logo {
+.logo{
 
 display:block;
 width:130px;
-height:auto;
 margin:0 auto 20px auto;
 
 }
 
 
-
-/* TITOLI */
-
-h1 {
+h1{
 
 text-align:center;
 font-size:27px;
-font-weight:700;
 margin:0;
-color:#111;
+font-weight:700;
 
 }
 
 
-.sottotitolo {
+.sottotitolo{
 
 text-align:center;
+color:#f58220;
 font-size:19px;
 font-weight:600;
-color:#f58220;
-margin-top:10px;
-margin-bottom:20px;
+margin:10px 0 20px;
 
 }
 
 
-
-.descrizione {
+.descrizione{
 
 text-align:center;
 font-size:13px;
-line-height:1.6;
 color:#666;
-margin-bottom:25px;
+line-height:1.6;
 
 }
 
 
-
-/* CAMPI */
-
-label {
+label{
 
 display:block;
+margin-top:18px;
 font-size:14px;
 font-weight:600;
-margin-top:18px;
 
 }
 
 
-input {
+input{
 
 width:100%;
 padding:13px;
 margin-top:7px;
 border-radius:8px;
 border:1px solid #ddd;
-font-size:14px;
-font-family:'Montserrat', sans-serif;
+font-family:'Montserrat',sans-serif;
 
 }
 
 
-
-.checkbox {
+.checkbox{
 
 display:flex;
 align-items:center;
-gap:10px;
+gap:8px;
 font-weight:500;
-margin-top:20px;
 
 }
 
 
-.checkbox input {
+.checkbox input{
 
 width:auto;
 
 }
 
 
-
-/* PULSANTE */
-
-button {
+button{
 
 width:100%;
 margin-top:25px;
@@ -149,73 +128,55 @@ padding:15px;
 background:#f58220;
 color:white;
 
-border:none;
+border:0;
 border-radius:8px;
 
 font-size:15px;
 font-weight:600;
-
-font-family:'Montserrat', sans-serif;
 
 cursor:pointer;
 
 }
 
 
-button:hover {
+button:hover{
 
 opacity:0.9;
 
 }
 
 
-
-/* RISULTATO */
-
-#risultato {
+#risultato{
 
 margin-top:25px;
-
 text-align:center;
-
 font-size:18px;
 font-weight:600;
-
 line-height:1.6;
 
 }
 
 
-
-/* AVVISO */
-
-.avviso {
+.avviso{
 
 width:90%;
 max-width:430px;
-
-margin:15px auto 30px auto;
+margin:20px auto;
 
 text-align:center;
-
 font-size:12px;
-line-height:1.6;
-
 color:#666;
+line-height:1.6;
 
 }
 
-
-
 </style>
-
 
 </head>
 
 
 
 <body>
-
 
 
 <div class="box">
@@ -226,13 +187,13 @@ color:#666;
 
 
 
-<h1>
-Cooperativa Taxi Lecce
-</h1>
+<h1>Cooperativa Taxi Lecce</h1>
 
 
 <div class="sottotitolo">
-🚕 Calcola il tuo preventivo
+
+Calcola il tuo preventivo
+
 </div>
 
 
@@ -249,38 +210,34 @@ Esempio: Via XX Settembre 10, Lecce
 
 
 <label>
-📍 Partenza
+Partenza
 </label>
 
-<input id="partenza" placeholder="Inserisci indirizzo di partenza">
-
+<input id="partenza" placeholder="Indirizzo completo di partenza">
 
 
 
 <label>
-📍 Destinazione
+Destinazione
 </label>
 
-<input id="destinazione" placeholder="Inserisci indirizzo di destinazione">
-
+<input id="destinazione" placeholder="Indirizzo completo di destinazione">
 
 
 
 <label>
-🕒 Ora del servizio
+Ora del servizio
 </label>
 
 <input id="ora" type="time">
 
 
 
-
 <label>
-🧳 Numero bagagli
+Numero bagagli
 </label>
 
 <input id="bagagli" type="number" min="0" value="0">
-
 
 
 
@@ -312,14 +269,12 @@ Calcola preventivo
 
 
 
-
-
 <div class="avviso">
 
-⚠️ Il prezzo calcolato è puramente indicativo.
+Il prezzo calcolato è puramente indicativo.
 <br>
-Può subire variazioni in base al percorso effettivo,
-al traffico, alle condizioni del servizio e ad eventuali supplementi.
+Può variare in base al percorso effettivo,
+al traffico e ad eventuali esigenze del servizio.
 
 </div>
 
@@ -342,7 +297,6 @@ encodeURIComponent(indirizzo)
 );
 
 
-
 let dati = await risposta.json();
 
 
@@ -358,11 +312,9 @@ throw "Indirizzo non trovato";
 return {
 
 lat:dati[0].lat,
-
 lon:dati[0].lon
 
 };
-
 
 }
 
@@ -373,32 +325,23 @@ lon:dati[0].lon
 async function calcola(){
 
 
-
-let risultato =
-document.getElementById("risultato");
+let risultato=document.getElementById("risultato");
 
 
-
-risultato.innerHTML =
-"⏳ Calcolo in corso...";
+risultato.innerHTML="Calcolo in corso...";
 
 
 
 try{
 
 
-
 let partenza =
-await geocode(
-document.getElementById("partenza").value
-);
+await geocode(document.getElementById("partenza").value);
 
 
 
 let destinazione =
-await geocode(
-document.getElementById("destinazione").value
-);
+await geocode(document.getElementById("destinazione").value);
 
 
 
@@ -428,6 +371,7 @@ await risposta.json();
 
 
 
+
 let km =
 percorso.routes[0].distance / 1000;
 
@@ -437,6 +381,10 @@ percorso.routes[0].distance / 1000;
 
 let prezzo =
 5 + (km * 1.65);
+
+
+
+let dettagli=[];
 
 
 
@@ -455,22 +403,27 @@ Number(ora.split(":")[0]);
 
 
 
-if(oraNumero >=21 && oraNumero <24){
+if(oraNumero>=21 && oraNumero<24){
 
-prezzo +=3;
+prezzo += 3;
 
-}
-
-
-
-if(oraNumero >=0 && oraNumero <6){
-
-prezzo +=5;
+dettagli.push("Servizio notturno 21:00-00:00: +3€");
 
 }
 
 
+
+if(oraNumero>=0 && oraNumero<6){
+
+prezzo += 5;
+
+dettagli.push("Servizio notturno 00:00-06:00: +5€");
+
 }
+
+
+}
+
 
 
 
@@ -481,7 +434,15 @@ Number(document.getElementById("bagagli").value);
 
 
 
+if(bagagli>0){
+
 prezzo += bagagli;
+
+dettagli.push(
+"Bagagli ("+bagagli+"): +"+bagagli+"€"
+);
+
+}
 
 
 
@@ -489,14 +450,19 @@ prezzo += bagagli;
 
 if(document.getElementById("festivo").checked){
 
-prezzo +=3;
+prezzo += 3;
+
+dettagli.push(
+"Servizio festivo: +3€"
+);
 
 }
 
 
 
 
-if(prezzo <10){
+
+if(prezzo<10){
 
 prezzo=10;
 
@@ -505,34 +471,53 @@ prezzo=10;
 
 
 
+risultato.innerHTML=
 
-risultato.innerHTML =
+"Distanza: "
++km.toFixed(1)
++" km"
 
-"🚗 Distanza: "
++"<br><br>"
+
++"Preventivo stimato: "
++prezzo.toFixed(2)
++" €"
+
++"<br><br>"
+
++"<div style='font-size:13px;color:#666;font-weight:400;'>"
+
 +
-km.toFixed(1)
+
+(dettagli.length>0
+
+?
+
+"<b>Supplementi applicati:</b><br>"+dettagli.join("<br>")
+
+:
+
+"Nessun supplemento applicato"
+
+)
+
 +
-" km"
-+
-"<br><br>"
-+
-"💶 Preventivo stimato: "
-+
-prezzo.toFixed(2)
-+
-" €";
+
+"</div>";
 
 
 
 }
 
 
-
 catch(e){
 
 
-risultato.innerHTML =
-"❌ Errore. Inserisci indirizzi completi.";
+risultato.innerHTML=
+"Errore. Controlla gli indirizzi inseriti.";
+
+
+console.log(e);
 
 
 }
@@ -544,7 +529,6 @@ risultato.innerHTML =
 
 
 </script>
-
 
 
 
