@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Prenotazione Taxi - Cooperativa Taxi Lecce</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+
+body{
+
+margin:0;
+background:#f4f4f4;
+font-family:'Montserrat',Arial,sans-serif;
+color:#222;
+
+}
+
+
+
+.box{
+
+width:90%;
+max-width:430px;
+margin:40px auto;
+
+background:white;
+
+padding:30px;
+
+border-radius:18px;
+
+box-shadow:0 5px 20px rgba(0,0,0,0.12);
+
+}
+
+
+
+.logo{
+
+display:block;
+
+width:130px;
+
+margin:0 auto 20px;
+
+}
+
+
+
+h1{
+
+text-align:center;
+
+font-size:26px;
+
+margin:0;
+
+}
+
+
+
+.sottotitolo{
+
+text-align:center;
+
+color:#f58220;
+
+font-size:19px;
+
+font-weight:600;
+
+margin:10px 0 25px;
+
+}
+
+
+
+label{
+
+display:block;
+
+font-size:14px;
+
+font-weight:600;
+
+margin-top:16px;
+
+}
+
+
+
+input, textarea{
+
+width:100%;
+
+padding:13px;
+
+margin-top:7px;
+
+border:1px solid #ddd;
+
+border-radius:8px;
+
+font-family:'Montserrat',sans-serif;
+
+font-size:14px;
+
+}
+
+
+
+textarea{
+
+height:90px;
+
+resize:none;
+
+}
+
+
+
+button{
+
+width:100%;
+
+margin-top:25px;
+
+padding:15px;
+
+border:0;
+
+border-radius:8px;
+
+background:#25D366;
+
+color:white;
+
+font-size:15px;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+opacity:0.9;
+
+}
+
+
+
+.info{
+
+text-align:center;
+
+font-size:13px;
+
+color:#666;
+
+line-height:1.5;
+
+margin-bottom:15px;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+<div class="box">
+
+
+<img class="logo" src="https://raw.githubusercontent.com/guidofrancesco123-dotcom/Calcolatore-Cooperativa-Taxi-Lecce/main/logo.png">
+
+
+<h1>
+Cooperativa Taxi Lecce
+</h1>
+
+
+<div class="sottotitolo">
+
+Richiedi prenotazione
+
+</div>
+
+
+<div class="info">
+
+Compila tutti i campi obbligatori.
+<br>
+Riceverai conferma tramite WhatsApp.
+
+</div>
+
+
+
+
+<label>
+Nome e cognome *
+</label>
+
+<input id="nome" required>
+
+
+
+<label>
+Numero di telefono *
+</label>
+
+<input id="telefono" type="tel" required>
+
+
+
+<label>
+Indirizzo di partenza *
+</label>
+
+<input id="partenza" required>
+
+
+
+<label>
+Indirizzo di arrivo *
+</label>
+
+<input id="arrivo" required>
+
+
+
+<label>
+Data servizio *
+</label>
+
+<input id="data" type="date" required>
+
+
+
+<label>
+Orario servizio *
+</label>
+
+<input id="ora" type="time" required>
+
+
+
+<label>
+Numero passeggeri *
+</label>
+
+<input id="passeggeri" type="number" min="1" required>
+
+
+
+<label>
+Note extra (facoltativo)
+</label>
+
+<textarea id="note" placeholder="Es. bagagli voluminosi, seggiolino bambino, richieste particolari..."></textarea>
+
+
+
+
+<button onclick="inviaWhatsApp()">
+
+Invia prenotazione WhatsApp
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+function inviaWhatsApp(){
+
+
+
+let nome =
+document.getElementById("nome").value;
+
+
+let telefono =
+document.getElementById("telefono").value;
+
+
+let partenza =
+document.getElementById("partenza").value;
+
+
+let arrivo =
+document.getElementById("arrivo").value;
+
+
+let data =
+document.getElementById("data").value;
+
+
+let ora =
+document.getElementById("ora").value;
+
+
+let passeggeri =
+document.getElementById("passeggeri").value;
+
+
+let note =
+document.getElementById("note").value;
+
+
+
+
+
+if(
+nome==="" ||
+telefono==="" ||
+partenza==="" ||
+arrivo==="" ||
+data==="" ||
+ora==="" ||
+passeggeri===""
+
+){
+
+alert("Compila tutti i campi obbligatori.");
+
+return;
+
+}
+
+
+
+
+
+let messaggio =
+
+"Buongiorno Cooperativa Taxi Lecce,%0A%0A"
+
++
+
+"Richiesta di prenotazione taxi.%0A%0A"
+
++
+
+"Nome e cognome: "
++nome
++"%0A"
+
++
+
+"Telefono: "
++telefono
++"%0A%0A"
+
++
+
+"Partenza: "
++partenza
++"%0A"
+
++
+
+"Arrivo: "
++arrivo
++"%0A"
+
++
+
+"Data: "
++data
++"%0A"
+
++
+
+"Orario: "
++ora
++"%0A"
+
++
+
+"Passeggeri: "
++passeggeri
++"%0A%0A"
+
++
+
+"Note extra: "
++(note==="" ? "Nessuna" : note)
+
++
+
+"%0A%0A"
+
++
+
+"Attendo conferma della disponibilità.%0A"
+
++
+
+"Grazie.";
+
+
+
+
+let numero = "393286714428";
+
+
+
+window.open(
+
+"https://wa.me/"
++numero
++"?text="
++messaggio,
+
+"_blank"
+
+);
+
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
